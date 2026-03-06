@@ -285,11 +285,16 @@ int __weak msm_secure_get_vmid_perms(u32 vmid) { return -ENODEV; }
 EXPORT_SYMBOL(msm_secure_get_vmid_perms);
 
 /* ── Haven hypervisor ────────────────────────────────────────────────── */
-int __weak hh_vcpu_populate_affinity_info(void *resource, unsigned int type)
+/*
+ * Signatures must exactly match include/linux/sched.h forward declarations:
+ *   extern int hh_vcpu_populate_affinity_info(u32 cpu_index, u64 cap_id);
+ *   extern int hh_vpm_grp_populate_info(u64 cap_id, int virq_num);
+ */
+int __weak hh_vcpu_populate_affinity_info(u32 cpu_index, u64 cap_id)
 { return -ENODEV; }
 EXPORT_SYMBOL(hh_vcpu_populate_affinity_info);
 
-int __weak hh_vpm_grp_populate_info(void *resource, unsigned int type)
+int __weak hh_vpm_grp_populate_info(u64 cap_id, int virq_num)
 { return -ENODEV; }
 EXPORT_SYMBOL(hh_vpm_grp_populate_info);
 
