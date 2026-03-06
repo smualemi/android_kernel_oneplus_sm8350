@@ -36,3 +36,8 @@ obj-$(CONFIG_MSM_SEB_RPMSG) += slate_events_bridge_rpmsg.o
 # Weak stubs for OPlus display notifier APIs (msm_drm_*, lcdinfo_*).
 # Required when building without OPlus's proprietary techpack/display fork.
 obj-y += oplus_display_stubs.o
+
+# Comprehensive weak stubs for QTI platform APIs unavailable in standalone
+# CI builds (socinfo, minidump, rpmh, cmd-db, smem_state, ramdump, etc.).
+# __weak symbols are overridden by the real driver modules at runtime.
+obj-y += oplus_platform_stubs.o
